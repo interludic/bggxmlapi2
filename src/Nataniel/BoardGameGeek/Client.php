@@ -23,13 +23,19 @@ class Client
      */
     public function getThing($id, $stats)
     {
-        $filename = sprintf('%s/thing?id=%d&stats=%d', self::API_URL, $id, $stats);
+        $filename = sprintf('%s/thing?id=39856,174430,35424,2860&stats=%d', self::API_URL, $id, $stats);
         $xml = simplexml_load_file($filename);
+    
         if (!$xml instanceof \SimpleXMLElement) {
             throw new Exception('API call failed');
         }
 
-        return new Thing($xml);
+        $array = [];
+        foreach ($xml as $thing) {
+            $array[] = new Thing($thing);            
+        }
+        
+        return $array;
     }
 
     /**

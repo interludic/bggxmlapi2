@@ -13,11 +13,11 @@ class Thing
         TYPE_BOARDGAMEEXPANSION = 'boardgameexpansion';
 
     /** @var \SimpleXMLElement */
-    private $root;
+    public $root;
 
     public function __construct(\SimpleXMLElement $xml)
     {
-        $this->root = $xml->item;
+        $this->root = $xml;
     }
 
     /**
@@ -58,6 +58,15 @@ class Thing
     public function getDescription()
     {
         return (string)$this->root->description;
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getThumbnail()
+    {
+        return (string)$this->root->thumbnail;
     }
 
     /**
